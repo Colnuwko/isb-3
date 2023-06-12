@@ -1,4 +1,3 @@
-import argparse
 import json
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import hashes, serialization
@@ -12,7 +11,7 @@ import os
 def load_settings():
     settings = {
         "decrypted_file": "C:/Users/Солнышко/PycharmProjects/isb-3/decrypted/dec_file.txt",
-        "encrypted_file": "C:/Users/Солнышко/PycharmProjects/isb-3/encrypted/enc_file.txt",
+        "encrypted_file": "C:/Users/Солнышко/PycharmProjects/isb-3/encrypted/enc_file.yaml",
         "initial_file": "C:/Users/Солнышко/PycharmProjects/isb-3/initial_file.txt",
         "public_key": "C:/Users/Солнышко/PycharmProjects/isb-3/public_key/public_key.pem",
         "secret_key": "C:/Users/Солнышко/PycharmProjects/isb-3/private_key/secret_key.pem",
@@ -32,7 +31,7 @@ def get_path(file_name):
 def generation_key_symmetric(bit, name) -> bytes:
     """генерация ключа симметричного алгоритма шифрования"""
     sym_key = os.urandom(bit)
-    with open(get_path(name),"wb")as f:
+    with open(get_path(name), "wb")as f:
         f.write(sym_key)
 
     return sym_key
