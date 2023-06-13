@@ -10,14 +10,14 @@ import os
 
 def load_settings():
     settings = {
-        "decrypted_file": "C:/Users/Солнышко/PycharmProjects/isb-3/decrypted/dec_file.txt",
-        "encrypted_file": "C:/Users/Солнышко/PycharmProjects/isb-3/encrypted/enc_file.yaml",
-        "initial_file": "C:/Users/Солнышко/PycharmProjects/isb-3/initial_file.txt",
-        "public_key": "C:/Users/Солнышко/PycharmProjects/isb-3/public_key/public_key.pem",
-        "secret_key": "C:/Users/Солнышко/PycharmProjects/isb-3/private_key/secret_key.pem",
-        "symmetric_key": "C:/Users/Солнышко/PycharmProjects/isb-3/symmetrical_key/key.txt",
-        "enc_symmetric_key": "C:/Users/Солнышко/PycharmProjects/isb-3/symmetrical_key/enc_key.txt"
-    }
+        "decrypted_file.txt": "C:/Users/Солнышко/PycharmProjects/isb-3/decrypted/dec_file.txt",
+        "encrypted_file.yaml": "C:/Users/Солнышко/PycharmProjects/isb-3/encrypted/enc_file.yaml",
+        "initial_file.txt": "C:/Users/Солнышко/PycharmProjects/isb-3/initial_file.txt",
+        "public_key.pem": "C:/Users/Солнышко/PycharmProjects/isb-3/public_key/public_key.pem",
+        "secret_key.pem": "C:/Users/Солнышко/PycharmProjects/isb-3/private_key/secret_key.pem",
+        "symmetric_key.txt": "C:/Users/Солнышко/PycharmProjects/isb-3/symmetrical_key/key.txt",
+        "enc_symmetric_key.txt": "C:/Users/Солнышко/PycharmProjects/isb-3/symmetrical_key/enc_key.txt"
+                }
     with open('settings.json', 'w') as fp:
         json.dump(settings, fp)
 
@@ -31,7 +31,7 @@ def get_path(file_name):
 def generation_key_symmetric(bit, name) -> bytes:
     """генерация ключа симметричного алгоритма шифрования"""
     sym_key = os.urandom(bit)
-    with open(get_path(name), "wb")as f:
+    with open(get_path(name), "wb") as f:
         f.write(sym_key)
 
     return sym_key

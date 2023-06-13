@@ -29,7 +29,7 @@ def decode_sym_key(path_to_sym_key, private_key) -> str:
 
 def padding_text(bit) -> str:
     """паддинг данных для работы блочного шифра (делаем длину сообщения кратной длине шифруемого блока"""
-    with open(script1.get_path("initial_file"), "r") as file:
+    with open(script1.get_path("initial_file.txt"), "r") as file:
         content = file.read()
     padder = padding2.ANSIX923(int(bit*8)).padder()
     text = bytes(content, "UTF-8")
@@ -45,5 +45,5 @@ def encrypted_text_symmetric_algorithm(symmetric_key, bit):
     encryptor = cipher.encryptor()
     text = encryptor.update(padded_text) + encryptor.finalize()
     dict = {"text": text, "iv": iv}
-    with open(script1.get_path("encrypted_file"), "w") as _file:
+    with open(script1.get_path("encrypted_file.yaml"), "w") as _file:
         yaml.dump(dict, _file)
