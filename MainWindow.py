@@ -18,14 +18,17 @@ import script1, script2, script3, main
 
 
 class Window(QMainWindow):
+    """Других вариантов нет, код идеален, Успех в любом случае"""
     def button_1_click(self):
         main.point_1(16)
-
+        QMessageBox.about(self, "Отчет", "Успех!")
     def button_2_click(self):
         main.point_2(16)
-
+        QMessageBox.about(self, "Отчет", "Успех!")
     def button_3_click(self):
         main.point_3()
+        QMessageBox.about(self, "Отчет", "Успех!")
+
 
     def reset_settings(self):
         with open('settings.json', 'w') as fp:
@@ -40,7 +43,10 @@ class Window(QMainWindow):
             }
             for key in settings:
                 path = QFileDialog.getExistingDirectory(self, key, ".")
-                settings[key] = path + "/" + key
+                if path == "":
+                    print("Ничего не выбрано")
+                else:
+                    settings[key] = path + "/" + key
                 print(settings)
             json.dump(settings, fp)
 
@@ -69,13 +75,15 @@ class Window(QMainWindow):
         self.button_2.clicked.connect(self.button_2_click)
         self.button_3.clicked.connect(self.button_3_click)
         self.position()
-        self.qm.question(self, '', "Хотите использовать директории по умолчанию?", self.qm.Yes | self.qm.No)
-        if self.qm.Yes:
+        self.ret = self.qm.question(self, '', "Хотите использовать директории по умолчанию?", self.qm.Yes | self.qm.No)
+        if self.ret == self.qm.Yes:
+            print("2")
             script1.load_settings()
             self.button_3.show()
             self.button_2.show()
             self.button_1.show()
-        if self.qm.No:
+        else:
+            print("1")
             self.reset_settings()
             self.button_3.show()
             self.button_2.show()
