@@ -1,29 +1,26 @@
 import json
+import sys
 
-from PyQt5.QtCore import QRegExp, Qt
-from PyQt5.QtGui import QRegExpValidator, QFont, QPixmap
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
-    QLineEdit,
     QMessageBox,
-    QLabel,
     QFileDialog,
-    QInputDialog,
 )
-import os
-import sys
-import script1, script2, script3, main
+
+import help_function
+import main
+import Symmetric
 
 
 class Window(QMainWindow):
     """Других вариантов нет, код идеален, Успех в любом случае"""
     def button_1_click(self):
-        main.point_1(16)
+        main.work_sym_algoritm(16)
         QMessageBox.about(self, "Отчет", "Успех!")
     def button_2_click(self):
-        main.point_2(16)
+        main.work_asym_algoritm(16)
         QMessageBox.about(self, "Отчет", "Успех!")
     def button_3_click(self):
         main.point_3()
@@ -78,7 +75,7 @@ class Window(QMainWindow):
         self.ret = self.qm.question(self, '', "Хотите использовать директории по умолчанию?", self.qm.Yes | self.qm.No)
         if self.ret == self.qm.Yes:
             print("2")
-            script1.load_settings()
+            help_function.create_settings()
             self.button_3.show()
             self.button_2.show()
             self.button_1.show()

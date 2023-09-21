@@ -1,7 +1,5 @@
 import yaml
-from yaml import loader
 
-import script2, script1
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
 
