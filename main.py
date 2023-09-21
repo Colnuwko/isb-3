@@ -1,7 +1,7 @@
 import Symmetric
 import help_function
 import Asymmetric
-import script3
+
 
 
 def work_sym_algoritm(bit: int) -> None:
@@ -15,22 +15,29 @@ def work_sym_algoritm(bit: int) -> None:
 
 
 def work_asym_algoritm(bit: int) -> None:
-    private_key = script2.deserialization_private_key("secret_key.pem")
-    symmetrical_key = script2.decode_sym_key("enc_symmetric_key.txt", private_key)
-    script2.encrypted_text_symmetric_algorithm(symmetrical_key, bit)
+    private_key = Asymmetric.generation_private_key()
+    public_key = Asymmetric.generation_public_key(private_key)
+
+    Asymmetric.serialiaztion_public_key(public_key)
+    Asymmetric.serialiaztion_private_key(private_key)
+
+    private_key = Asymmetric.deserialization_private_key()
+    public_key = Asymmetric.deserialization_public_key()
+
+    sym_key = help_function.get_text_in_bytes("path_to_sym_key")
+    Asymmetric.asymmetric_encrypt(public_key, sym_key)
+
+    cipher_key = help_function.get_text_in_bytes("path_to_enc_key_asym")
+    Asymmetric.asymmetric_decrypt(private_key, cipher_key)
 
 
 
 
-def point_3():
-    private_key = script2.deserialization_private_key("secret_key.pem")
-    symmetrical_key = script2.decode_sym_key("enc_symmetric_key.txt", private_key)
-    script3.decrypted_text(symmetrical_key, "encrypted_file.yaml", "decrypted_file.txt")
 
 
-if __name__ == '__main__':
-    point_1(16)
-    point_2(16)
-    point_3()
+def work_hybrid_algoritm() -> None:
+    print(1)
+
+
 
 

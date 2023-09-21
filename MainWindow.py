@@ -23,7 +23,7 @@ class Window(QMainWindow):
         main.work_asym_algoritm(16)
         QMessageBox.about(self, "Отчет", "Успех!")
     def button_3_click(self):
-        main.point_3()
+
         QMessageBox.about(self, "Отчет", "Успех!")
 
 

@@ -1,10 +1,8 @@
-import os
-import yaml
 import help_function
 from typing import Any
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import padding as padding2, serialization
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.serialization import load_pem_private_key, load_pem_public_key
 
 
@@ -18,11 +16,11 @@ def generation_public_key(key: Any) -> Any:
     return key.public_key()
 
 
-def serialiaztion_public_key(key: Any) -> None:
+def serialiaztion_public_key(public_key: Any) -> None:
     """сериализация открытого ключа"""
     with open(help_function.get_path("path_to_public_key"), "wb") as file:
-        file.write(key.public_bytes(encoding=serialization.Encoding.PEM,
-                                    format=serialization.PublicFormat.SubjectPublicKeyInfo, ))
+        file.write(public_key.public_bytes(encoding=serialization.Encoding.PEM,
+                                           format=serialization.PublicFormat.SubjectPublicKeyInfo))
 
 
 def serialiaztion_private_key(key: Any) -> None:
@@ -33,25 +31,36 @@ def serialiaztion_private_key(key: Any) -> None:
                                      encryption_algorithm=serialization.NoEncryption()))
 
 
-def deserializ_private_key() -> bytes:
+def deserialization_private_key() -> bytes:
     """десериализация закрытого ключа"""
     with open(help_function.get_path("path_to_secret_key"), "rb") as pem_in:
         private_bytes = pem_in.read()
     private_key = load_pem_private_key(private_bytes, password=None)
-    print(type(private_key))
     return private_key
 
 
 def deserialization_public_key() -> bytes:
     """десериализация открытоёго ключа"""
     with open(help_function.get_path("path_to_public_key"), "rb") as pem_in:
-        private_bytes = pem_in.read()
-    private_key = load_pem_public_key(private_bytes, password=None)
-    print(type(private_key))
-    return private_key
+        public_bytes = pem_in.read()
+    public_key = load_pem_public_key(public_bytes)
+    return public_key
 
 
+def asymmetric_encrypt(public_key: Any, text: bytes) -> None:
+    """Шифрование симетричного ключа с помощью открытого ключа, из пары ключей несиметричного алгоритма"""
+    encrypted_text = public_key.encrypt(text, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                                                           algorithm=hashes.SHA256(), label=None, ))
+    print(4.5)
+    with open(help_function.get_path("path_to_enc_key_asym"), "wb") as _file:
+        _file.write(encrypted_text)
 
 
-
-
+def asymmetric_decrypt(private_key, encrypted_text: bytes) -> bytes:
+    """Дешифруем зашифрованный симметричный ключ с помощью закрытого ключа"""
+    text = private_key.decrypt(encrypted_text, padding.OAEP(mgf=padding.MGF1(
+        algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None, ))
+    print(type(text))
+    with open(help_function.get_path("path_to_dec_key_asym"), "wb") as _file:
+        _file.write(encrypted_text)
+    return text

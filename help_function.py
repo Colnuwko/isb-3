@@ -5,6 +5,8 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding as padding2
 def create_settings() -> None:
     """Создание начальных настроек"""
     settings = {
+        "path_to_dec_key_asym": "files/dec_asym_key.txt",
+        "path_to_enc_key_asym": "files/enc_asym_key .txt",
         "path_to_decrypted_file": "files/dec_file.txt",
         "path_to_encrypted_file": "files/enc_file.txt",
         "path_to_initial_file": "files/initial_file.txt",
