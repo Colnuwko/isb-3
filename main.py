@@ -35,8 +35,8 @@ def work_asym_algoritm(bit: int) -> None:
 
 
 
-def work_hybrid_algoritm() -> None:
-    print(1)
+
+
 
 
 

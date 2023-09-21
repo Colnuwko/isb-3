@@ -91,10 +91,10 @@ def application() -> None:
     app = QApplication(sys.argv)
     window = Window()
     window.setObjectName("MainWindow")
-    window.setWindowIcon(QtGui.QIcon("phon.png"))
+    window.setWindowIcon(QtGui.QIcon("files/phon.png"))
     window.setMinimumSize(1000, 800)
     window.setMaximumSize(1024, 720)
-    window.setStyleSheet("#MainWindow{border-image:url(phon.png)}")
+    window.setStyleSheet("#MainWindow{border-image:url(files/phon.png)}")
     window.show()
     sys.exit(app.exec_())
 
