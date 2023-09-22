@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding as padding2
 
 
 def create_settings() -> None:
-    """Создание начальных настроек"""
+    """Создание и сохранение настроек по умолчанию """
     settings = {
         "path_to_dec_key_asym": "files/dec_asym_key.txt",
         "path_to_enc_key_asym": "files/enc_asym_key .txt",
@@ -27,10 +27,11 @@ def get_path(file_name: str) -> str:
 
 
 def get_text_in_bytes(path_to_file: str) -> bytes:
-    """Возвращает текст в битовом формате"""
+    """Возвращает текст в битовом формате или False если файла нет"""
     with open(get_path(path_to_file), mode='rb') as text_file:
         text = text_file.read()
         return text
+
 
 
 def padding_text(bit) -> str:

@@ -1,10 +1,7 @@
-import json
-import warnings
 import help_function
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives import hashes, serialization, padding
+from cryptography.hazmat.primitives import padding
 import os
-from typing import Any
 
 
 def generation_sym_key(bit: int) -> bytes:

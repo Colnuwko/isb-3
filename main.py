@@ -15,7 +15,7 @@ def work_sym_algoritm(bit: int) -> None:
     Symmetric.symmetric_decrypt(sym_key, text_in_bytes)
 
 
-def work_asym_algoritm(bit: int) -> None:
+def work_asym_algoritm() -> None:
     private_key = Asymmetric.generation_private_key()
     public_key = Asymmetric.generation_public_key(private_key)
 
