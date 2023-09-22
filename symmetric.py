@@ -8,7 +8,9 @@ def generation_sym_key(bit: int) -> bytes:
     """генерация и сохранение ключа симметричного алгоритма шифрования"""
     sym_key = os.urandom(bit)
     return sym_key
-def save_sym_key(sym_key: bytes) ->None:
+
+
+def save_sym_key(sym_key: bytes) -> None:
     with open(help_function.get_path("path_to_sym_key"), "wb") as f:
         f.write(sym_key)
 
@@ -42,8 +44,3 @@ def symmetric_decrypt(sym_key: bytes, encrypted_text: bytes) -> None:
     unpadded_text = unpadder.update(text) + unpadder.finalize()
     with open(help_function.get_path("path_to_decrypted_file"), "wb") as _file:
         _file.write(unpadded_text)
-
-
-
-
-

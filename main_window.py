@@ -10,25 +10,20 @@ from PyQt5.QtWidgets import (
 )
 import help_function
 import main
-import Hybrid
 
 
 class Window(QMainWindow):
     """Других вариантов нет, код идеален, Успех в любом случае"""
-    def button_1_click(self):
+    def button_work_symm_click(self):
         main.work_sym_algoritm(16)
         QMessageBox.about(self, "Отчет", "Успех!")
 
-    def button_2_click(self):
+    def button_work_asymm_click(self):
         main.work_asym_algoritm()
         QMessageBox.about(self, "Отчет", "Успех!")
 
-    def button_3_click(self):
-        keys = Hybrid.create_keys()
-        Hybrid.save_keys(keys)
-        Hybrid.load_keys()
-        Hybrid.encrypt_text()
-        Hybrid.decrypt_text()
+    def button_work_hybrid_click(self):
+        main.work_hybrid_algoritm()
         QMessageBox.about(self, "Отчет", "Успех!")
 
     def reset_settings(self):
@@ -59,41 +54,41 @@ class Window(QMainWindow):
             json.dump(settings, fp)
 
     def set_position(self):
-        self.button_1.setMinimumSize(220, 30)
-        self.button_1.move(425, 300)
-        self.button_1.setText("Запустить симметричный алгоритм")
-        self.button_2.setMinimumSize(220, 30)
-        self.button_2.move(425, 355)
-        self.button_2.setText("Запустить асимметричный алгоритм")
-        self.button_3.setMinimumSize(220, 30)
-        self.button_3.move(425, 410)
-        self.button_3.setText("Запустить гибридный алгоритм")
+        self.button_work_symm.setMinimumSize(220, 30)
+        self.button_work_symm.move(425, 300)
+        self.button_work_symm.setText("Запустить симметричный алгоритм")
+        self.button_work_asymm.setMinimumSize(220, 30)
+        self.button_work_asymm.move(425, 355)
+        self.button_work_asymm.setText("Запустить асимметричный алгоритм")
+        self.button_work_hybrid.setMinimumSize(220, 30)
+        self.button_work_hybrid.move(425, 410)
+        self.button_work_hybrid .setText("Запустить гибридный алгоритм")
 
     def __init__(self) -> None:
         """ "create a window object"""
         super(Window, self).__init__()
         self.qm = QMessageBox()
-        self.button_1 = QtWidgets.QPushButton(self)
-        self.button_2 = QtWidgets.QPushButton(self)
-        self.button_3 = QtWidgets.QPushButton(self)
-        self.button_3.hide()
-        self.button_2.hide()
-        self.button_1.hide()
-        self.button_1.clicked.connect(self.button_1_click)
-        self.button_2.clicked.connect(self.button_2_click)
-        self.button_3.clicked.connect(self.button_3_click)
+        self.button_work_symm = QtWidgets.QPushButton(self)
+        self.button_work_asymm = QtWidgets.QPushButton(self)
+        self.button_work_hybrid = QtWidgets.QPushButton(self)
+        self.button_work_hybrid.hide()
+        self.button_work_asymm.hide()
+        self.button_work_symm.hide()
+        self.button_work_symm.clicked.connect(self.button_work_symm_click)
+        self.button_work_asymm.clicked.connect(self.button_work_asymm_click)
+        self.button_work_hybrid.clicked.connect(self.button_work_hybrid_click)
         self.set_position()
         help_function.create_settings()
         self.ret = self.qm.question(self, '', "Хотите использовать директории по умолчанию?", self.qm.Yes | self.qm.No)
         if self.ret == self.qm.Yes:
-            self.button_3.show()
-            self.button_2.show()
-            self.button_1.show()
+            self.button_work_hybrid.show()
+            self.button_work_asymm.show()
+            self.button_work_symm.show()
         else:
             self.reset_settings()
-            self.button_3.show()
-            self.button_2.show()
-            self.button_1.show()
+            self.button_work_hybrid.show()
+            self.button_work_asymm.show()
+            self.button_work_symm.show()
 
 
 def application() -> None:

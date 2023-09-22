@@ -1,5 +1,5 @@
 import json
-from cryptography.hazmat.primitives.asymmetric import rsa, padding as padding2
+from cryptography.hazmat.primitives.asymmetric import padding as padding2
 
 
 def create_settings() -> None:
@@ -33,7 +33,6 @@ def get_text_in_bytes(path_to_file: str) -> bytes:
         return text
 
 
-
 def padding_text(bit) -> str:
     """паддинг данных для работы блочного шифра (делаем длину сообщения кратной длине шифруемого блока"""
     with open(get_path("path_to_initial_file"), "r") as file:
@@ -42,13 +41,3 @@ def padding_text(bit) -> str:
     text = bytes(content, "UTF-8")
     padded_text = padder.update(text) + padder.finalize()
     return padded_text
-
-
-
-
-
-
-
-
-
-
