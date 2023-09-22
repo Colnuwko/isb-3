@@ -51,16 +51,14 @@ def asymmetric_encrypt(public_key: Any, text: bytes) -> None:
     """Шифрование симетричного ключа с помощью открытого ключа, из пары ключей несиметричного алгоритма"""
     encrypted_text = public_key.encrypt(text, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
                                                            algorithm=hashes.SHA256(), label=None, ))
-    print(4.5)
     with open(help_function.get_path("path_to_enc_key_asym"), "wb") as _file:
         _file.write(encrypted_text)
 
 
 def asymmetric_decrypt(private_key, encrypted_text: bytes) -> bytes:
     """Дешифруем зашифрованный симметричный ключ с помощью закрытого ключа"""
-    text = private_key.decrypt(encrypted_text, padding.OAEP(mgf=padding.MGF1(
-        algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None, ))
-    print(type(text))
+    text = private_key.decrypt(encrypted_text, padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                                                            algorithm=hashes.SHA256(), label=None, ))
     with open(help_function.get_path("path_to_dec_key_asym"), "wb") as _file:
-        _file.write(encrypted_text)
+        _file.write(text)
     return text

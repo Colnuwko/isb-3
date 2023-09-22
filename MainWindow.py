@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import (
 import help_function
 import main
 import Symmetric
-
+import Hybrid
 
 class Window(QMainWindow):
     """Других вариантов нет, код идеален, Успех в любом случае"""
@@ -23,7 +23,11 @@ class Window(QMainWindow):
         main.work_asym_algoritm(16)
         QMessageBox.about(self, "Отчет", "Успех!")
     def button_3_click(self):
-
+        keys = Hybrid.create_keys()
+        Hybrid.save_keys(keys)
+        Hybrid.load_keys()
+        Hybrid.encrypt_text()
+        Hybrid.decrypt_text()
         QMessageBox.about(self, "Отчет", "Успех!")
 
 

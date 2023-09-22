@@ -10,9 +10,15 @@ from typing import Any
 def generation_sym_key(bit: int) -> bytes:
     """генерация и сохранение ключа симметричного алгоритма шифрования"""
     sym_key = os.urandom(bit)
+    return sym_key
+def save_sym_key(sym_key: bytes) ->None:
     with open(help_function.get_path("path_to_sym_key"), "wb") as f:
         f.write(sym_key)
-    return sym_key
+
+
+def load_sym_key() -> bytes:
+    with open(help_function.get_path("path_to_sym_key"), "rb") as f:
+        return f.read()
 
 
 def symmetric_encrypt(sym_key: bytes, text: bytes) -> None:

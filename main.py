@@ -8,6 +8,7 @@ def work_sym_algoritm(bit: int) -> None:
     """Создание и сохранение симметричного ключа, шифрование и дешифрование текста с помощью созданого ключа
     запись в соответствующие файлы. Папка Files"""
     sym_key = Symmetric.generation_sym_key(bit)
+    Symmetric.save_sym_key(sym_key)
     text_in_bytes = help_function.get_text_in_bytes("path_to_initial_file")
     Symmetric.symmetric_encrypt(sym_key, text_in_bytes)
     text_in_bytes = help_function.get_text_in_bytes("path_to_encrypted_file")
